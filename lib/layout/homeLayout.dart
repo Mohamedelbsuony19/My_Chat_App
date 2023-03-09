@@ -83,6 +83,7 @@ class homeLayout extends StatelessWidget {
                       if (formkey.currentState!.validate()) {
                         provider.changeLoading(true);
                         try {
+
                           await loginToFirebase(email,password);
                           showSnackBar(context, 'success Log In');
                           Navigator.pushNamed(context, chatScreen.routeName,

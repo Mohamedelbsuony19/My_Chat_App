@@ -183,7 +183,6 @@ class chatScreen extends StatelessWidget {
           }
         });
   }
-
   Future getImage() async {
     ImagePicker imagePicker = ImagePicker();
     PickedFile? pickedFile;
