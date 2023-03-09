@@ -96,9 +96,9 @@ class homeLayout extends StatelessWidget {
                             showSnackBar(context,
                                 'Wrong password provided for that user.');
                           }
-                        } catch (e) {
-                          showSnackBar(context, e.toString());
-                          print(e);
+                        } catch (ex) {
+                          showSnackBar(context, ex.toString());
+                          print(ex);
                         }
                         provider.changeLoading(false);
                       }
