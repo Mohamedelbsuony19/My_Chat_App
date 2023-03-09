@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 class registerScreen extends StatelessWidget {
   static const String routeName = 'reg';
   String? email, password;
-  GlobalKey<FormState> formkey = GlobalKey();
+  GlobalKey<FormState> formGlobalKey = GlobalKey();
   registerScreen({super.key});
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class registerScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Form(
-            key: formkey,
+            key: formGlobalKey,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -117,7 +117,7 @@ class registerScreen extends StatelessWidget {
                   customButton(
                       text: 'REGISTER',
                       onTap: () async {
-                        if (formkey.currentState!.validate()) {
+                        if (formGlobalKey.currentState!.validate()) {
                           provider.changeLoading(true);
                           try {
                             await registerToFirebase(email,password );

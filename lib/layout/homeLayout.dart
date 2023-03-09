@@ -13,7 +13,7 @@ import '../helper/shared/utlis_firebase.dart';
 
 class homeLayout extends StatelessWidget {
   static const String routeName = 'home';
-  GlobalKey<FormState> formkey = GlobalKey();
+  GlobalKey<FormState> formGlobalKey = GlobalKey();
   String? email, password;
 
   @override
@@ -26,7 +26,7 @@ class homeLayout extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Form(
-            key: formkey,
+            key: formGlobalKey,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -80,7 +80,7 @@ class homeLayout extends StatelessWidget {
                   customButton(
                     text: 'LOGIN',
                     onTap: () async {
-                      if (formkey.currentState!.validate()) {
+                      if (formGlobalKey.currentState!.validate()) {
                         provider.changeLoading(true);
                         try {
 
