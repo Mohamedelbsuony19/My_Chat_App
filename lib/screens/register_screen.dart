@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_chat_app/helper/shared/provider/register_provider.dart';
 import 'package:my_chat_app/screens/chat_screen.dart';
+import 'package:my_chat_app/widgets/custom_text_form_field.dart';
 import '../helper/shared/constans.dart';
 import '../helper/shared/show_snack_bar.dart';
-import '../helper/shared/utlis_firebase.dart';
+import '../helper/shared/firebase_utils.dart';
 import '../widgets/custom_button.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -56,14 +56,13 @@ class registerScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                    style: const TextStyle(
-                      color: Colors.white
-                    ),
-                    onChanged: (data) {
+                  customTextFormField(
+                    hint: 'Email',
+                    textStyle: const TextStyle(color: Colors.white),
+                    onChange: (data) {
                       email = data;
                     },
-                    validator: (data) {
+                    validate: (data) {
                       final bool emailValid = RegExp(
                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(data!);
@@ -71,45 +70,22 @@ class registerScreen extends StatelessWidget {
                         return 'The email format is incorrect ';
                       }
                     },
-                    decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      hintText: 'Email',
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: Colors.white),
-                    ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                    style: const TextStyle(
-                      color: Colors.white
-                    ),
-                    obscureText: true,
-                    onChanged: (data) {
+                  customTextFormField(
+                    hint: 'Password',
+                    textStyle: const TextStyle(color: Colors.white),
+                    obscure: true,
+                    onChange: (data) {
                       password = data;
                     },
-                    validator: (data) {
+                    validate: (data) {
                       if (data!.length < 7) {
                         return 'password is a short';
                       }
                     },
-                    decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      hintText: 'Password',
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: Colors.white),
-                    ),
                   ),
                   const SizedBox(
                     height: 10,
@@ -120,7 +96,7 @@ class registerScreen extends StatelessWidget {
                         if (formGlobalKey.currentState!.validate()) {
                           provider.changeLoading(true);
                           try {
-                            await registerToFirebase(email,password );
+                            await registerToFirebase(email, password);
                             showSnackBar(context, 'success register');
                             Navigator.pushNamed(context, chatScreen.routeName,
                                 arguments: email);
@@ -179,7 +155,4 @@ class registerScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }
-
