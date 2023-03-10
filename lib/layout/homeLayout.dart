@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:my_chat_app/screens/chat_screen.dart';
 import 'package:my_chat_app/screens/register_screen.dart';
 import 'package:my_chat_app/widgets/custom_button.dart';
-import 'package:my_chat_app/widgets/custom_text_field.dart';
+import 'package:my_chat_app/widgets/custom_text_form_field.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../helper/shared/constans.dart';
 import '../helper/shared/show_snack_bar.dart';
 import '../helper/shared/provider/home_provider.dart';
-import '../helper/shared/utlis_firebase.dart';
+import '../helper/shared/firebase_utils.dart';
 
 class homeLayout extends StatelessWidget {
   static const String routeName = 'home';
@@ -60,6 +60,14 @@ class homeLayout extends StatelessWidget {
                   ),
                   customTextFormField(
                     hint: 'Email',
+                    validate: (data) {
+                      final bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(data!);
+                      if (emailValid == false) {
+                        return 'The email format is incorrect ';
+                      }
+                    },
                     onChange: (data) {
                       email = data;
                     },
@@ -69,6 +77,11 @@ class homeLayout extends StatelessWidget {
                   ),
                   customTextFormField(
                     obscure: true,
+                    validate: (data) {
+                      if (data!.length < 7) {
+                        return 'password is a short';
+                      }
+                    },
                     hint: 'Password',
                     onChange: (data) {
                       password = data;
@@ -83,8 +96,7 @@ class homeLayout extends StatelessWidget {
                       if (formGlobalKey.currentState!.validate()) {
                         provider.changeLoading(true);
                         try {
-
-                          await loginToFirebase(email,password);
+                          await loginToFirebase(email, password);
                           showSnackBar(context, 'success Log In');
                           Navigator.pushNamed(context, chatScreen.routeName,
                               arguments: email);
@@ -148,5 +160,4 @@ class homeLayout extends StatelessWidget {
       ),
     );
   }
-
 }

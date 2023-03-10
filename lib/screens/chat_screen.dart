@@ -3,9 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:my_chat_app/models/message-model.dart';
+import '../helper/shared/constans.dart';
 import '../helper/shared/provider/theme-provider.dart';
 import '../widgets/chat_buble.dart';
 import 'package:image_picker/image_picker.dart';
+import '../widgets/custom_text_field.dart';
 import '../widgets/image_buble.dart';
 import 'package:provider/provider.dart';
 
@@ -48,29 +50,13 @@ class chatScreen extends StatelessWidget {
                     : const Color(0xFF1F2C34),
                 actions: [
                   Image.asset(
-                    'assets/images/icon.png',
+                    KImageIcon,
                     height: 40,
                     width: 40,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.25,
                   ),
-                  IconButton(
-                      onPressed: () {
-                        themeprvider.changeTheme();
-                      },
-                      icon: themeprvider.isLight
-                          ? const Icon(
-                              Icons.dark_mode_outlined,
-                              size: 35,
-                            )
-                          : const Icon(
-                              Icons.light_mode,
-                              size: 35,
-                            )),
-                  const SizedBox(
-                    width: 10,
-                  )
                 ],
               ),
               body: Column(
@@ -97,15 +83,15 @@ class chatScreen extends StatelessWidget {
                       itemCount: messgesList.length,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: TextField(
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    child: customTextField(
                       controller: controller,
-                      style: TextStyle(
+                      textStyle: TextStyle(
                           color: themeprvider.isLight
                               ? Colors.black
                               : Colors.white),
-                      onSubmitted: (data) {
+                      onSubmitt: (data) {
                         contentMessage = data;
                         messages?.add({
                           'message': contentMessage,
@@ -174,8 +160,36 @@ class chatScreen extends StatelessWidget {
                             borderSide: const BorderSide(color: Colors.white)),
                       ),
                     ),
-                  )
+                  ),
                 ],
+              ),
+              floatingActionButton: Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        color:
+                            themeprvider.isLight ? Colors.black : Colors.white,
+                        width: 2,
+                        style: BorderStyle.solid)),
+                margin: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.height * .1),
+                child: FloatingActionButton(
+                    onPressed: () {
+                      themeprvider.changeTheme();
+                    },
+                    child: themeprvider.isLight
+                        ? const Icon(
+                            Icons.dark_mode_outlined,
+                            color: Colors.black,
+                            size: 35,
+                          )
+                        : const Icon(
+                            Icons.light_mode,
+                            size: 35,
+                          ),
+                    backgroundColor: themeprvider.isLight
+                        ? Colors.white
+                        : Color(0xFF1F2C34)),
               ),
             );
           } else {
@@ -183,6 +197,7 @@ class chatScreen extends StatelessWidget {
           }
         });
   }
+
   Future getImage() async {
     ImagePicker imagePicker = ImagePicker();
     PickedFile? pickedFile;
