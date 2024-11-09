@@ -28,7 +28,7 @@ class customTextFormField extends StatelessWidget {
         hintText: hint,
         hintStyle: Theme.of(context)
             .textTheme
-            .bodyText1!
+            .bodyMedium!
             .copyWith(color: Colors.white),
       ),
     );

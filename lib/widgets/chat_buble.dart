@@ -31,7 +31,7 @@ class chatBuble extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 modelMassge.id ?? 'notFound',
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: themeprovider.isLight
                         ? const Color(0xFF1611AF)
                         : Colors.grey),
@@ -39,7 +39,7 @@ class chatBuble extends StatelessWidget {
             ),
             Text(
               modelMassge.message ?? '',
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: themeprovider.isLight ? Colors.black : Colors.white),
             ),
           ],
@@ -78,7 +78,7 @@ class chatBubleForFrind extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 modelMassge.id ?? 'notFound',
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: themeprovider.isLight
                         ? const Color(0xFF1611AF)
                         : Colors.grey),
@@ -86,7 +86,7 @@ class chatBubleForFrind extends StatelessWidget {
             ),
             Text(
               modelMassge.message ?? '',
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: themeprovider.isLight ? Colors.black : Colors.white),
             ),
           ],

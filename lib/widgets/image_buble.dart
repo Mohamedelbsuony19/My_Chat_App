@@ -30,7 +30,7 @@ class ImageBuble extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 model!.id ?? '',
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: themeprovider.isLight
                           ? const Color(0xFF1611AF)
                           : Colors.grey,
@@ -47,7 +47,7 @@ class ImageBuble extends StatelessWidget {
                     model!.message ?? '',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1!
+                        .bodyMedium!
                         .copyWith(color: Colors.grey),
                   ),
           ],
@@ -83,7 +83,7 @@ class imageBubleForFrind extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 model.id!,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: themeprovider.isLight
                         ? const Color(0xFF1611AF)
                         : Colors.grey),
@@ -99,7 +99,7 @@ class imageBubleForFrind extends StatelessWidget {
                     model.message ?? '',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1!
+                        .bodyMedium!
                         .copyWith(color: Colors.grey),
                   ),
           ],

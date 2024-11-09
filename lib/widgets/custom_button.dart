@@ -18,7 +18,7 @@ class customButton extends StatelessWidget {
             text!,
             style: Theme.of(context)
                 .textTheme
-                .bodyText1!
+                .bodyMedium!
                 .copyWith(fontWeight: FontWeight.bold, fontSize: 18),
           ),
         ),

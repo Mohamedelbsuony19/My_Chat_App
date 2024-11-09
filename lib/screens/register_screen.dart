@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:my_chat_app/helper/shared/provider/register_provider.dart';
 import 'package:my_chat_app/screens/chat_screen.dart';
 import 'package:my_chat_app/widgets/custom_text_form_field.dart';
-import '../helper/shared/constans.dart';
-import '../helper/shared/show_snack_bar.dart';
-import '../helper/shared/firebase_utils.dart';
-import '../widgets/custom_button.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
+
+import '../helper/shared/constans.dart';
+import '../helper/shared/firebase_utils.dart';
+import '../helper/shared/show_snack_bar.dart';
+import '../widgets/custom_button.dart';
 
 class registerScreen extends StatelessWidget {
   static const String routeName = 'reg';
@@ -34,7 +35,7 @@ class registerScreen extends StatelessWidget {
                   Image.asset(KImageIcon),
                   Text(
                     'Chat App',
-                    style: Theme.of(context).textTheme.headline2!.copyWith(
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
                         fontFamily: KFontPacifico,
                         fontSize: 30,
                         color: Colors.white),
@@ -46,10 +47,13 @@ class registerScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Register',
-                        style: Theme.of(context).textTheme.headline2!.copyWith(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                       ),
                     ],
                   ),
@@ -69,6 +73,7 @@ class registerScreen extends StatelessWidget {
                       if (emailValid == false) {
                         return 'The email format is incorrect ';
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -85,6 +90,7 @@ class registerScreen extends StatelessWidget {
                       if (data!.length < 7) {
                         return 'password is a short';
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -124,7 +130,7 @@ class registerScreen extends StatelessWidget {
                         'Have An Account ?',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1!
+                            .bodyLarge!
                             .copyWith(color: Colors.white),
                       ),
                       const SizedBox(
@@ -138,7 +144,7 @@ class registerScreen extends StatelessWidget {
                           'Log In',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1
+                              .bodyLarge
                               ?.copyWith(color: Colors.red, fontSize: 15),
                         ),
                       )

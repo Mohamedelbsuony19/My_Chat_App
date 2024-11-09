@@ -1,20 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:my_chat_app/screens/chat_screen.dart';
 import 'package:my_chat_app/screens/register_screen.dart';
 import 'package:my_chat_app/widgets/custom_button.dart';
 import 'package:my_chat_app/widgets/custom_text_form_field.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../helper/shared/constans.dart';
-import '../helper/shared/show_snack_bar.dart';
-import '../helper/shared/provider/home_provider.dart';
-import '../helper/shared/firebase_utils.dart';
 
-class homeLayout extends StatelessWidget {
+import '../helper/shared/constans.dart';
+import '../helper/shared/firebase_utils.dart';
+import '../helper/shared/provider/home_provider.dart';
+import '../helper/shared/show_snack_bar.dart';
+
+class HomeLayout extends StatelessWidget {
   static const String routeName = 'home';
-  GlobalKey<FormState> formGlobalKey = GlobalKey();
+ final GlobalKey<FormState> formGlobalKey = GlobalKey();
   String? email, password;
+
+  HomeLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class homeLayout extends StatelessWidget {
                   Image.asset(KImageIcon),
                   Text(
                     'Chat App',
-                    style: Theme.of(context).textTheme.headline2!.copyWith(
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
                         fontFamily: KFontPacifico,
                         fontSize: 30,
                         color: Colors.white),
@@ -48,10 +51,13 @@ class homeLayout extends StatelessWidget {
                     children: [
                       Text(
                         'Log In',
-                        style: Theme.of(context).textTheme.headline2!.copyWith(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                       ),
                     ],
                   ),
@@ -67,6 +73,7 @@ class homeLayout extends StatelessWidget {
                       if (emailValid == false) {
                         return 'The email format is incorrect ';
                       }
+                      return null;
                     },
                     onChange: (data) {
                       email = data;
@@ -81,6 +88,7 @@ class homeLayout extends StatelessWidget {
                       if (data!.length < 7) {
                         return 'password is a short';
                       }
+                      return null;
                     },
                     hint: 'Password',
                     onChange: (data) {
@@ -126,7 +134,7 @@ class homeLayout extends StatelessWidget {
                         'Don\'t Have An Account ?',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1!
+                            .bodyLarge!
                             .copyWith(color: Colors.white),
                       ),
                       const SizedBox(
@@ -143,7 +151,7 @@ class homeLayout extends StatelessWidget {
                           'Register',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1
+                              .bodyLarge
                               ?.copyWith(color: Colors.red, fontSize: 15),
                         ),
                       )
